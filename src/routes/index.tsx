@@ -1,15 +1,19 @@
+// React
+import { Suspense } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// Others
 export * from './paths'
 import { Loader } from '@/components/icons'
 import { $UserRole } from '@/enums'
 import AppLayout from '@/layout/App.layout'
 import AuthLayout from '@/layout/Auth.layout'
+// Pages
 import NotFoundPage from '@/pages/404'
 import Home from '@/pages/home'
 import LogIn from '@/pages/log-in'
 import Profile from '@/pages/profile'
+import ResetPassword from '@/pages/reset-password'
 import SignUp from '@/pages/sign-up'
-import { Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Routes as Pathnames } from './paths'
 
 export const AppRouter = () => {
@@ -27,6 +31,7 @@ export const AppRouter = () => {
           <Route element={<AuthLayout />}>
             <Route path={Pathnames.logIn} element={<LogIn />} />
             <Route path={Pathnames.signUp} element={<SignUp />} />
+            <Route path={Pathnames.resetPassword()} element={<ResetPassword />} />
           </Route>
           {/* Auth routes */}
 

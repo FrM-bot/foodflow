@@ -91,7 +91,7 @@ export default function SignUpForm() {
             Registrarse
           </Button>
         </form>
-        <div className="flex justify-center mt-4">
+        <div className="flex mt-4">
           <p className="text-[#A0AEC0]">
             ¿Ya tienes una cuenta?{' '}
             <Link className="underline text-[#1CB5E0] font-semibold" to={Routes.logIn}>
