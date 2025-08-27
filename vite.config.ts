@@ -2,6 +2,7 @@ import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig, loadEnv } from 'vite'
+import vercel from 'vite-plugin-vercel'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -9,7 +10,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), vercel()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
@@ -18,6 +19,9 @@ export default defineConfig(({ mode }) => {
     define: {
       // Exponer variables de entorno específicas al código cliente
       'import.meta.env.BASE_SERVER_URL': JSON.stringify(env.BASE_SERVER_URL),
+    },
+    server: {
+      port: process.env.PORT as unknown as number,
     },
   }
 })
