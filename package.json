@@ -1,5 +1,5 @@
 {
-	"name": "simple-template",
+	"name": "chatbot-dashboard",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -10,43 +10,47 @@
 		"format": "biome format --write ./src",
 		"lint:check": "biome lint ./src",
 		"lint:apply": "biome check --write ./src",
-		"lint": "yarn format && yarn lint:check && yarn lint:apply",
+		"lint": "pnpm format && pnpm lint:check && pnpm lint:apply",
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"@radix-ui/react-avatar": "1.1.0",
-		"@radix-ui/react-dialog": "1.1.1",
-		"@radix-ui/react-icons": "1.3.0",
-		"@radix-ui/react-popover": "1.1.1",
-		"@radix-ui/react-slot": "1.1.0",
-		"axios": "^1.7.3",
-		"class-variance-authority": "0.7.0",
+		"@hookform/resolvers": "5.0.1",
+		"@radix-ui/react-avatar": "1.1.10",
+		"@radix-ui/react-dialog": "1.1.14",
+		"@radix-ui/react-icons": "1.3.2",
+		"@radix-ui/react-popover": "1.1.14",
+		"@radix-ui/react-slot": "1.2.3",
+		"@tailwindcss/vite": "4.1.7",
+		"@tanstack/react-query": "5.77.2",
+		"axios": "1.7.3",
+		"class-variance-authority": "0.7.1",
 		"clsx": "2.1.1",
-		"formik": "2.4.6",
-		"lucide-react": "0.414.0",
-		"react": "18.3.1",
-		"react-dom": "18.3.1",
-		"react-icons": "^5.3.0",
-		"react-router-dom": "6.25.1",
-		"sonner": "1.5.0",
-		"tailwind-merge": "2.4.0",
+		"lucide-react": "0.511.0",
+		"react": "19.1.0",
+		"react-dom": "19.1.0",
+		"react-hook-form": "7.56.4",
+		"react-icons": "5.5.0",
+		"react-router-dom": "7.6.1",
+		"sonner": "2.0.3",
+		"tailwind-merge": "3.3.0",
 		"tailwindcss-animate": "1.0.7",
-		"yup": "1.4.0",
-		"zustand": "4.5.4"
+		"zod": "3.25.31",
+		"zustand": "5.0.5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.8.3",
-		"@types/node": "20.14.11",
-		"@types/react": "18.3.3",
-		"@types/react-dom": "18.3.0",
-		"@vitejs/plugin-react-swc": "3.7.0",
-		"autoprefixer": "10.4.19",
-		"husky": "^9.1.1",
-		"lint-staged": "^15.2.7",
-		"postcss": "8.4.39",
-		"tailwindcss": "3.4.6",
-		"typescript": "5.5.3",
-		"vite": "5.3.4"
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "22.15.23",
+		"@types/react": "19.1.6",
+		"@types/react-dom": "19.1.5",
+		"@vitejs/plugin-react-swc": "3.10.0",
+		"autoprefixer": "10.4.21",
+		"husky": "9.1.7",
+		"lint-staged": "16.1.0",
+		"postcss": "8.5.3",
+		"tailwindcss": "4.1.7",
+		"tw-animate-css": "1.3.0",
+		"typescript": "5.8.3",
+		"vite": "6.3.5"
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
@@ -57,6 +61,5 @@
 			"biome check --apply --organize-imports-enabled=false --no-errors-on-unmatched",
 			"biome check --apply-unsafe --no-errors-on-unmatched"
 		]
-	},
-	"packageManager": "yarn@1.22.22"
+	}
 }

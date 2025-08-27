@@ -1,5 +1,3 @@
-import { logIn } from './logIn'
-
 export const Services = {
   users: {
     getAll: 'https://jsonplaceholder.typicode.com/users',
@@ -8,11 +6,6 @@ export const Services = {
   auth: {
     signUp: 'https://jsonplaceholder.typicode.com/users',
     logIn: 'https://jsonplaceholder.typicode.com/users/1',
+    session: 'https://jsonplaceholder.typicode.com/users/1',
   },
 }
-
-export const ServerHandler = {
-  logIn,
-} as const
-
-export type ServerHandler = keyof typeof ServerHandler

@@ -1,93 +1,58 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import useSignUp from '@/hooks/useSignUp'
 import { Routes } from '@/routes'
-import { type SignUp, SignUpSchema } from '@/schemas/signUp.schema'
-import { useFormik } from 'formik'
-import { Link, useNavigate } from 'react-router-dom'
+import { type SignUp, SignUpSchema } from '@/schemas/sign-up.schema'
+import { logIn as logInService } from '@/services/logIn'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
 
-function SignUpForm() {
-  const { signUp, loading } = useSignUp()
-  const navigate = useNavigate()
-
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      fullName: '',
-      username: '',
-    } as SignUp,
-    validationSchema: SignUpSchema,
-    onSubmit: async ({ email, password, fullName, username }) => {
-      try {
-        const result = await signUp({
-          email,
-          password,
-          fullName,
-          username,
-        })
-
-        if (result.success) navigate(Routes.logIn)
-
-        if (result.error) toast.error(result.error)
-      } catch (error) {
-        console.log(error)
-      }
-    },
+function useLogIn() {
+  const { mutateAsync: logIn, isPending } = useMutation({
+    mutationFn: logInService,
   })
 
-  return (
-    <main className="">
-      <div className="mb-4 flex gap-1 items-center">
-        <span className="text-xl font-semibold text-center">Crear cuenta</span>
-      </div>
-      <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-        {/* Input fullName */}
-        <label className="flex flex-col gap-1">
-          <span>Nombre y Apellido</span>
-          <Input
-            onChange={formik.handleChange}
-            value={formik.values.fullName}
-            onBlur={formik.handleBlur}
-            name="fullName"
-            placeholder="Nombre y Apellido"
-            type="text"
-            required
-          />
-          {formik.touched.fullName && <span className="border-primary text-primary">{formik.errors.fullName}</span>}
-        </label>
-        {/* Input fullName */}
+  return { logIn, isPending }
+}
 
-        {/* Input username */}
-        <label className="flex flex-col gap-1">
+export default function SignUpForm() {
+  // const navigate = useNavigate()
+  const { logIn, isPending } = useLogIn()
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<SignUp>({
+    resolver: zodResolver(SignUpSchema),
+  })
+  const onSubmit: SubmitHandler<SignUp> = async (data) => {
+    const [error, result] = await logIn(data)
+    if (error) toast.error(error)
+    if (result) toast.success(result)
+  }
+  console.log(watch('email'))
+  return (
+    <main>
+      <div className="mb-4 flex gap-1 items-center">
+        <span className="text-xl font-semibold text-center">Registrarse</span>
+      </div>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        {/* Input Email */}
+        <label className="flex flex-col gap-1" htmlFor="email">
           <span>Correo</span>
-          <Input
-            onChange={formik.handleChange}
-            value={formik.values.username}
-            onBlur={formik.handleBlur}
-            name="username"
-            placeholder="my_username02"
-            type="text"
-            required
-          />
-          {formik.touched.username && <span className="border-primary text-primary">{formik.errors.username}</span>}
+          <Input {...register('email')} />
+          {errors.email && <span>{errors.email.message}</span>}
         </label>
-        {/* Input username */}
+        {/* Input Email */}
 
         {/* Input Password */}
-        <label className="flex flex-col gap-1">
-          <span>Contraseña</span>
-          <Input
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
-            name="password"
-            placeholder="****************"
-            type="password"
-            required
-          />
-          {formik.touched.password && <span className="border-primary text-primary">{formik.errors.password}</span>}
+        <label className="flex flex-col gap-1" htmlFor="password">
+          <span>Password</span>
+          <Input {...register('password')} />
+          {errors.password && <span>{errors.password.message}</span>}
         </label>
         {/* Input Password */}
         <div className="flex gap-1">
@@ -97,12 +62,10 @@ function SignUpForm() {
           </Link>
         </div>
 
-        <Button loading={loading} type="submit" className="w-full">
+        <Button type="submit" className="w-full" loading={isPending}>
           Registrarse
         </Button>
       </form>
     </main>
   )
 }
-
-export default SignUpForm

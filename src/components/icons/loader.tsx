@@ -9,7 +9,6 @@ export const Loader = ({ ...props }: Props) => {
   return (
     <svg
       aria-hidden="true"
-      role="status"
       {...props}
       className={cn('h-[1rem] w-[1rem] animate-spin', props.className)}
       viewBox="0 0 100 101"

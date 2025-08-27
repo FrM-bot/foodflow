@@ -1,5 +1,5 @@
 import LogInForm from './form.component'
 
-export function Component() {
+export default function LogInPage() {
   return <LogInForm />
 }

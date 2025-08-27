@@ -1,7 +1,7 @@
 import { Routes } from '@/routes'
 import { Link } from 'react-router-dom'
-import { MenuDesktop } from './menuDesktop'
-import { MenuMobile } from './menuMobile'
+import { MenuDesktop } from './menu-desktop'
+import { MenuMobile } from './menu-mobile'
 
 export function Header() {
   return (

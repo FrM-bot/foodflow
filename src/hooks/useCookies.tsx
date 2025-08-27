@@ -1,23 +1,18 @@
+import type { $CookieKey } from '@/enums'
 import { useState } from 'react'
-
-export const $CookieKey = {
-  SessionToken: 'SessionToken',
-} as const
 
 type CookieKey = (typeof $CookieKey)[keyof typeof $CookieKey]
 
 export const getCookie = ({
   key,
-  cookie,
 }: {
   key: CookieKey
-  cookie: string | undefined
 }) => {
-  if (!cookie) {
+  if (!window.document.cookie) {
     return null
   }
-  const decodedCookie = decodeURIComponent(cookie)
-  const listOfCookies = decodedCookie.split(';')
+  const decodedCookie = decodeURIComponent(window.document.cookie)
+  const listOfCookies = decodedCookie.split('; ')
   const cookieKeyValue = listOfCookies.find((cookie) => cookie.startsWith(key))
   return cookieKeyValue?.split('=').at(1)
 }
@@ -30,20 +25,32 @@ type CookieOptions = {
   path?: string
   secure?: boolean
   httpOnly?: boolean
+  sameSite?: 'strict' | 'lax' | 'none'
 }
 
-export const setCookieFn = ({ name, value, maxAge = 7, expires, path }: CookieOptions) => {
+export const setCookieFn = ({ name, value, maxAge, expires, path, secure, httpOnly, sameSite }: CookieOptions) => {
   const day = 60 * 60 * 24
   const baseCookie = {
-    value: `${name}=${value};SameSite=strict;Secure;path=${path}`,
+    value: `${name}=${value}`,
   }
-  if (maxAge >= 0) {
+  if (path) {
+    baseCookie.value += `;path=${path}`
+  }
+  if (maxAge && maxAge >= 0) {
     baseCookie.value += `;max-age=${day * maxAge}`
   }
   if (expires) {
     baseCookie.value += `;expires=${expires}`
   }
-
+  if (sameSite) {
+    baseCookie.value += `;SameSite=${sameSite}`
+  }
+  if (secure) {
+    baseCookie.value += ';Secure'
+  }
+  if (httpOnly) {
+    baseCookie.value += ';HttpOnly'
+  }
   if (path) {
     baseCookie.value += `;path=${path}`
   }
@@ -62,29 +69,14 @@ export default function useCookies() {
     )
     return cookies
   })
-  console.log(document.cookie, 'document')
-
-  // useEffect(() => {
-  //     document.cookie = Object.entries(cookies).map(([key, value]) => `${key}=${value}`).join('; ')
-  //     console.log(Object.entries(cookies).map(([key, value]) => `${key}=${value}`).join('; '))
-  // }, [cookies])
 
   const setCookieHandler = (cookie: CookieOptions) => {
-    console.log({ cookie })
     setCookieFn(cookie)
     setCookie((prev) => ({ ...prev, [cookie.name]: cookie.value }))
   }
-  // const remove = (key: CookieKey) => {
-  //     setCookie(prev => Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key)))
-  // }
 
-  // const clear = () => {
-  //     setCookie({})
-  // }
   return {
     cookies,
     setCookie: setCookieHandler,
-    // remove,
-    // clear
   }
 }

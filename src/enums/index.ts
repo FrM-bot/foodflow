@@ -1,16 +1,28 @@
 export const $SessionStatus = {
-  UNAUTHENTICATED: 'UNAUTHENTICATED',
-  AUTHENTICATED: 'AUTHENTICATED',
-  UNAUTHENTICATED_ERROR: 'UNAUTHENTICATED_ERROR',
-  LOADING: 'LOADING',
+  unauthenticated: 'UNAUTHENTICATED',
+  authenticated: 'AUTHENTICATED',
+  unauthenticated_error: 'UNAUTHENTICATED_ERROR',
+  loading: 'LOADING',
 } as const
 
 export const $UserRole = {
-  USER: 'user',
-  ADMIN: 'admin',
+  user: 'user',
+  admin: 'admin',
 } as const
 
 export const $ResponseStatus = {
-  SUCCESS: 'success',
-  ERROR: 'error',
+  success: 'success',
+  error: 'error',
+} as const
+
+export const $CookieKey = {
+  session_token: 'session_token',
+} as const
+
+export const $LocalStorageKey = {
+  session_token: 'session_token',
+} as const
+
+export const $QueryKey = {
+  session: 'session',
 } as const

@@ -1,8 +1,6 @@
 // import { Person } from '@/components/icons'
 import { Card } from '@/components/ui/card'
-import { getAllUsers } from '@/services/users'
 import type { User } from '@/types/user'
-import { useLoaderData } from 'react-router-dom'
 
 export const CardUser = ({ fullName, username }: Pick<User, 'fullName' | 'username'>) => {
   return (
@@ -32,17 +30,16 @@ export const CardUser = ({ fullName, username }: Pick<User, 'fullName' | 'userna
   )
 }
 
-export function loader() {
-  const data = getAllUsers()
-  return data
-}
-
 export default function Home() {
-  const users = useLoaderData() as { data: User[] }
-
   return (
     <ul className="grid grid-cols-4 gap-4">
-      {users.data.map((user) => (
+      {[
+        {
+          id: 1,
+          fullName: 'John Doe',
+          username: 'johndoe',
+        },
+      ].map((user) => (
         <CardUser key={user.id} fullName={user.fullName} username={user.username} />
       ))}
     </ul>

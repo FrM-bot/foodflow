@@ -1,14 +1,14 @@
 import { Avatar } from '@/components/avatar'
 import { Logout, Person } from '@/components/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useSession } from '@/hooks/auth'
 import { Routes } from '@/routes'
+import { useSession } from '@/store/session'
 import { Link } from 'react-router-dom'
 
 export const UserNavar = () => {
-  const { user, signOut } = useSession()
+  const { session, signOut } = useSession()
 
-  if (!user)
+  if (!session)
     return (
       <Link className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600" to={Routes.logIn}>
         <Person />
@@ -19,13 +19,13 @@ export const UserNavar = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Avatar src="" alt={user?.email || 'U'} />
+        <Avatar src="" alt={session?.email || 'U'} />
       </PopoverTrigger>
       <PopoverContent className="w-60 flex flex-col bg-white text-black">
         <div>
           <div className="space-y-2 flex justify-around items-center ">
             <div className="flex items-center font-semibold">
-              <Link to={Routes.user.profile}>{user?.email}</Link>
+              <Link to={Routes.user.profile}>{session?.email}</Link>
             </div>
           </div>
           <div className="flex justify-around items-center mt-3">

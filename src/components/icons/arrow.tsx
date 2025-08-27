@@ -5,7 +5,7 @@ const Rotations = {
   top: 'rotate-90',
   bottom: '-rotate-90',
   right: 'rotate-180',
-  left: 'rotate-40',
+  left: 'rotate-0',
 }
 
 type Directions = keyof typeof Rotations

@@ -1,77 +1,41 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import useLogIn from '@/hooks/useLogIn'
 import { Routes } from '@/routes'
 import { type LogIn, LogInSchema } from '@/schemas/login.schema'
-import { useFormik } from 'formik'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'sonner'
-// import useLogIn from '@/modules/auth/hooks/useLogIn'
-// import { useErrorBoundary } from 'react-error-boundary'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 export default function LogInForm() {
-  const { logIn, loading } = useLogIn()
-  const navigate = useNavigate()
-  //   const { showBoundary } = useErrorBoundary()
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    } as LogIn,
-    validationSchema: LogInSchema,
-    onSubmit: async ({ email, password }) => {
-      try {
-        const response = await logIn({
-          email,
-          password,
-        })
-        if (response?.success) {
-          navigate(Routes.home)
-        }
-
-        if (response?.error) toast.error(response.error)
-      } catch (error) {
-        console.log(error)
-        // return showBoundary(error)
-      }
-    },
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<LogIn>({
+    resolver: zodResolver(LogInSchema),
   })
-
+  const onSubmit: SubmitHandler<LogIn> = (data) => console.log(data)
+  console.log(watch('email'))
   return (
     <main>
       <div className="mb-4 flex gap-1 items-center">
         <span className="text-xl font-semibold text-center">Iniciar sesión</span>
       </div>
-      <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         {/* Input Email */}
-        <label className="flex flex-col gap-1">
+        <label className="flex flex-col gap-1" htmlFor="email">
           <span>Correo</span>
-          <Input
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
-            name="email"
-            placeholder="email@gmail.com"
-            type="email"
-            required
-          />
-          {formik.touched.email && <span className="border-primary text-primary">{formik.errors.email}</span>}
+          <Input {...register('email')} />
+          {errors.email && <span>{errors.email.message}</span>}
         </label>
         {/* Input Email */}
 
         {/* Input Password */}
-        <label className="flex flex-col gap-1">
+        <label className="flex flex-col gap-1" htmlFor="password">
           <span>Password</span>
-          <Input
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
-            name="password"
-            placeholder="****************"
-            type="password"
-            required
-          />
-          {formik.touched.password && <span className="border-primary text-primary">{formik.errors.password}</span>}
+          <Input {...register('password')} />
+          {errors.password && <span>{errors.password.message}</span>}
         </label>
         {/* Input Password */}
         <div className="flex gap-1">
@@ -81,7 +45,7 @@ export default function LogInForm() {
           </Link>
         </div>
 
-        <Button loading={loading} type="submit" className="w-full">
+        <Button type="submit" className="w-full" loading={null}>
           Ingresar
         </Button>
       </form>

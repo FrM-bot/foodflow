@@ -1,17 +1,17 @@
 import { Avatar } from '@/components/avatar'
 import { Logout } from '@/components/icons'
-import { ButtonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { $SessionStatus } from '@/enums'
-import { useSession } from '@/hooks/auth'
 import { cn } from '@/lib/utils'
 import { Routes } from '@/routes'
+import { useSession } from '@/store/session'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { Link } from 'react-router-dom'
 import { NavLinks } from './links'
 
 export const MenuMobile = () => {
-  const { user, signOut, status } = useSession()
+  const { session, signOut, status } = useSession()
 
   return (
     <Popover>
@@ -20,18 +20,18 @@ export const MenuMobile = () => {
       </PopoverTrigger>
       <PopoverContent className="w-60 flex flex-col bg-white text-black">
         <div className="flex flex-col gap-y-4">
-          {status === $SessionStatus.AUTHENTICATED && user !== null && (
+          {status === $SessionStatus.authenticated && session !== null && (
             <div>
               <Link to={Routes.user.profile} className="flex justify-center font-semibold">
-                <Avatar src="" alt={user?.email || 'U'} />
+                <Avatar src="" alt={session?.email || 'U'} />
               </Link>
               <Link to={Routes.user.profile} className="flex justify-center font-semibold mt-2">
-                {user.email}
+                {session?.email}
               </Link>
             </div>
           )}
 
-          {user === null &&
+          {session === null &&
             NavLinks.map((link) => (
               <Link
                 key={link.label}
@@ -45,8 +45,8 @@ export const MenuMobile = () => {
               </Link>
             ))}
 
-          {status === $SessionStatus.UNAUTHENTICATED ? (
-            <Link to={Routes.logIn} className={cn(ButtonVariants(), 'flex justify-center font-semibold')}>
+          {status === $SessionStatus.unauthenticated ? (
+            <Link to={Routes.logIn} className={cn(buttonVariants(), 'flex justify-center font-semibold')}>
               Iniciar sesión
             </Link>
           ) : (

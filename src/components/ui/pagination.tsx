@@ -1,10 +1,10 @@
-import { type ButtonProps, ButtonVariants } from '@/components/ui/button'
+import { type ButtonProps, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import * as React from 'react'
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
-  <nav role="navigation" aria-label="pagination" className={cn('mx-auto flex w-full justify-center', className)} {...props} />
+  <nav aria-label="pagination" className={cn('mx-auto flex w-full justify-center', className)} {...props} />
 )
 Pagination.displayName = 'Pagination'
 
@@ -27,7 +27,7 @@ const PaginationLink = ({ className, isActive, size = 'icon', ...props }: Pagina
   <a
     aria-current={isActive ? 'page' : undefined}
     className={cn(
-      ButtonVariants({
+      buttonVariants({
         variant: isActive ? 'outline' : 'ghost',
         size,
       }),

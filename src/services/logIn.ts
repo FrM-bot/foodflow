@@ -10,19 +10,13 @@ export const logIn = async ({ email, password }: LogIn) => {
       password,
     })
 
-    if (response.data.status === $ResponseStatus.ERROR) {
-      return {
-        error: 'Ha ocurrido un error',
-      }
+    if (response.data.status === $ResponseStatus.error) {
+      return [response.data, null]
     }
 
-    return {
-      success: 'Registro exitoso',
-    }
+    return [null, response.data]
   } catch (error) {
     console.error(error)
-    return {
-      error: 'Ha ocurrido un error',
-    }
+    return [error, null]
   }
 }

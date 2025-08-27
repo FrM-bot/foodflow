@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
 import { NavLinks } from './links'
-import { UserNavar } from './userNav'
+import { UserNavar } from './user-nav'
 
 export function MenuDesktop() {
   return (
