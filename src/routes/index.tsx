@@ -1,5 +1,5 @@
 // React
-import { Suspense } from 'react'
+import { Suspense, lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // Others
 export * from './paths'
@@ -7,20 +7,20 @@ import { Loader } from '@/components/icons'
 import { $UserRole } from '@/enums'
 import AppLayout from '@/layout/App.layout'
 import AuthLayout from '@/layout/Auth.layout'
-// Pages
-import NotFoundPage from '@/pages/404'
-import Home from '@/pages/home'
-import LogIn from '@/pages/log-in'
-import Profile from '@/pages/profile'
-import ResetPassword from '@/pages/reset-password'
-import SignUp from '@/pages/sign-up'
+// Pages (dynamic imports)
+const NotFoundPage = lazy(() => import('@/pages/404'))
+const Home = lazy(() => import('@/pages/home'))
+const LogIn = lazy(() => import('@/pages/log-in'))
+const Profile = lazy(() => import('@/pages/profile'))
+const ResetPassword = lazy(() => import('@/pages/reset-password'))
+const SignUp = lazy(() => import('@/pages/sign-up'))
 import { Routes as Pathnames } from './paths'
 
 export const AppRouter = () => {
   return (
     <Suspense
       fallback={
-        <div className="h-screen w-full grid place-content-center">
+        <div className="h-screen w-full grid place-content-center bg-gradient-to-br from-[lch(8_13.7_275.28)] to-[lch(8_13.7_275.28)]">
           <Loader />
         </div>
       }
