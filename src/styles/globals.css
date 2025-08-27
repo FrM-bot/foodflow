@@ -68,7 +68,7 @@
 	}
 }
 
-@layer components {
+/* @layer components {
 	.button {
 		@apply active:tracking-wide duration-200 px-[.8rem] py-[.4rem] fill-transparent rounded-md disabled:opacity-60 disabled:cursor-not-allowed border shadow-md hover:shadow-lg;
 	}
@@ -78,13 +78,13 @@
 	}
 
 	.input {
-		@apply appearance-none px-[.8rem] py-[.3rem] border rounded-md border-neutral-800/50 focus:border-transparent focus:outline-none;
+		@apply ;
 	}
 
 	.input__primary {
-		@apply bg-white transition-all duration-200 placeholder:text-slate-500 focus:border-neutral-800 focus:shadow-lg;
+		@apply ;
 	}
-}
+} */
 
 @theme inline {
 	--radius-sm: calc(var(--radius) - 4px);
