@@ -5,13 +5,13 @@ import * as React from 'react'
 import { Loader } from '../icons'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ',
+  'inline-flex items-center cursor-pointer justify-center whitespace-nowrap duration-200 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ',
   {
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground shadow',
         destructive: 'bg-destructive text-destructive-foreground shadow-sm',
-        outline: 'border border-neutral-800 bg-background shadow-sm hover:bg-accent',
+        outline: 'border border-neutral-900 bg-background shadow-sm hover:bg-accent',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm',
         ghost: 'hover:bg-neutral-100 hover:text-black',
         link: 'text-primary underline-offset-4 hover:underline',
