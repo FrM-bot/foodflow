@@ -6,4 +6,5 @@ export const Routes = {
   user: {
     profile: '/profile',
   },
+  resetPassword: (id = ':id') => `/reset/${id}`,
 } as const

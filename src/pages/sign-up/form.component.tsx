@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Routes } from '@/routes'
 import { type SignUp, SignUpSchema } from '@/schemas/sign-up.schema'
 import { logIn as logInService } from '@/services/logIn'
@@ -23,7 +24,6 @@ export default function SignUpForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<SignUp>({
     resolver: zodResolver(SignUpSchema),
@@ -33,39 +33,73 @@ export default function SignUpForm() {
     if (error) toast.error(error)
     if (result) toast.success(result)
   }
-  console.log(watch('email'))
+
   return (
-    <main>
-      <div className="mb-4 flex gap-1 items-center">
-        <span className="text-xl font-semibold text-center">Registrarse</span>
-      </div>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        {/* Input Email */}
-        <label className="flex flex-col gap-1" htmlFor="email">
-          <span>Correo</span>
-          <Input {...register('email')} />
-          {errors.email && <span>{errors.email.message}</span>}
-        </label>
-        {/* Input Email */}
-
-        {/* Input Password */}
-        <label className="flex flex-col gap-1" htmlFor="password">
-          <span>Password</span>
-          <Input {...register('password')} />
-          {errors.password && <span>{errors.password.message}</span>}
-        </label>
-        {/* Input Password */}
-        <div className="flex gap-1">
-          <p>¿Ya tienes una cuenta?</p>
-          <Link className="underline" to={Routes.logIn}>
-            Iniciar sesión
-          </Link>
+    <main className="flex flex-col items-center justify-center">
+      <div className="w-full max-w-md">
+        <div className="flex flex-col items-center mb-6">
+          <span className="text-xl font-bold text-white mt-2 mb-1">Crea tu cuenta</span>
+          <span className="text-sm text-[#A0AEC0] mb-2 text-center">Ingresa tus datos para registrarte en FoodFlow</span>
         </div>
-
-        <Button type="submit" className="w-full" loading={isPending}>
-          Registrarse
-        </Button>
-      </form>
+        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit(onSubmit)}>
+          {/* Nombre y Apellido */}
+          <div className="col-span-1 flex flex-col gap-1">
+            <Label className="text-white" htmlFor="name">
+              Nombre
+            </Label>
+            <Input {...register('name')} placeholder="Nombre" />
+            {errors.name && <span className="text-red-400 text-xs">{errors.name.message}</span>}
+          </div>
+          <div className="col-span-1 flex flex-col gap-1">
+            <Label className="text-white" htmlFor="lastName">
+              Apellido
+            </Label>
+            <Input {...register('lastName')} placeholder="Apellido" />
+            {errors.lastName && <span className="text-red-400 text-xs">{errors.lastName.message}</span>}
+          </div>
+          {/* Email */}
+          <div className="col-span-2 flex flex-col gap-1">
+            <Label className="text-white" htmlFor="email">
+              Email
+            </Label>
+            <Input {...register('email')} placeholder="john@example.com" />
+            {errors.email && <span className="text-red-400 text-xs">{errors.email.message}</span>}
+          </div>
+          {/* Password */}
+          <div className="col-span-2 flex flex-col gap-1">
+            <Label className="text-white" htmlFor="password">
+              Password
+            </Label>
+            <Input type="password" {...register('password')} placeholder="********" />
+            {errors.password && <span className="text-red-400 text-xs">{errors.password.message}</span>}
+          </div>
+          {/* Confirm Password */}
+          <div className="col-span-2 flex flex-col gap-1">
+            <Label className="text-white" htmlFor="_password">
+              Confirm Password
+            </Label>
+            <Input type="password" {...register('_password')} placeholder="********" />
+            {errors._password && <span className="text-red-400 text-xs">{errors._password.message}</span>}
+          </div>
+          {/* Botón */}
+          <Button
+            type="submit"
+            className="col-span-2 bg-gradient-to-r from-cyan-400 to-blue-950 hover:shadow-lg hover:shadow-blue-950 border border-neutral-700"
+            size="lg"
+            loading={isPending}
+          >
+            Registrarse
+          </Button>
+        </form>
+        <div className="flex mt-4">
+          <p className="text-[#A0AEC0]">
+            ¿Ya tienes una cuenta?{' '}
+            <Link className="underline text-[#1CB5E0] font-semibold" to={Routes.logIn}>
+              Inicia sesión
+            </Link>
+          </p>
+        </div>
+      </div>
     </main>
   )
 }
