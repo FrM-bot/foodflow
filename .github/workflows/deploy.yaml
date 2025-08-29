@@ -32,10 +32,11 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << 'EOF'
           # Elimina el código anterior y clona el nuevo desde GitHub
-          rm -rf foodflow-frontend
           cd /home/ubuntu
+          rm -rf foodflow-frontend
           git clone https://github.com/${{ github.repository }}.git foodflow-frontend
           cd foodflow-frontend
+          cp /home/ubuntu/.env /home/ubuntu/foodflow-frontend/.env
           # Construye y levanta los servicios con Docker Compose
           docker compose down || true
           docker compose up -d --build
