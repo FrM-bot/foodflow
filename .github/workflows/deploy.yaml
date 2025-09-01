@@ -48,13 +48,10 @@ jobs:
       #     EOF
 
 
-
-      - name: Crear archivo .env dinámicamente
-        run: |
-            echo "VITE_BASE_SERVER_URL=${{ vars.VITE_BASE_SERVER_URL }}" >> .env
-            echo "VITE_TEST_ENV=${{ vars.VITE_TEST_ENV }}" >> .env
-            echo "${{ vars }}" >> .env
-            echo "${{ secrets }}" >> .env
+      - name: Set environment variables from .env
+        uses: c-py/action-dotenv-to-setenv@v5
+        with:
+          env-file: .env
 
       - name: Copy .env to EC2
         run: |
