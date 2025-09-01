@@ -44,7 +44,7 @@ jobs:
       #     EOF
 
       - name: Crear archivo .env dinámicamente
-        run: printenv | grep '^VITE_' > .env
+        run: printenv > .env
 
       - name: Copy .env to EC2
         run: |
