@@ -48,4 +48,4 @@ jobs:
 
       - name: Copy .env to EC2
         run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} .env ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }}:/home/ubuntu/.env
+          scp -o StrictHostKeyChecking=no ${{ secrets.SSH_PRIVATE_KEY }} .env ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }}:/home/ubuntu/.env
