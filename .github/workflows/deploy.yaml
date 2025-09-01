@@ -43,6 +43,7 @@ jobs:
           rm -rf foodflow-frontend
           git clone https://github.com/${{ github.repository }}.git foodflow-frontend
           # Construye y levanta los servicios con Docker Compose
+          cd foodflow-frontend
           docker compose down || true
           docker compose up -d --build
           EOF
