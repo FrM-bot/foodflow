@@ -3,7 +3,7 @@ name: Deploy Docker Image to EC2
 on:
   push:
     branches:
-      - deploy
+      - main
 env:
   REDEPLOY: true
 
@@ -11,29 +11,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v5
-
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
-
-      # - name: Cache Docker layers
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: /tmp/.buildx-cache
-      #     key: ${{ runner.os }}-buildx-${{ github.sha }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-buildx-
-
-      # - name: Install SSH Key
-      #   uses: webfactory/ssh-agent@v0.9.0
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Configure SSH key
         run: |
-            mkdir -p ~/.ssh
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Create file .env
         run: |
@@ -42,10 +24,9 @@ jobs:
           VITE_BASE_SERVER_URL: ${{ vars.VITE_BASE_SERVER_URL }}
           VITE_TEST_ENV: ${{ vars.VITE_TEST_ENV }}
 
-
       - name: Copy .env to EC2
         run: |
-           scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no .env ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }}:/home/ubuntu/.env
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no .env ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }}:/home/ubuntu/.env
 
       - name: Deploy Docker image to EC2
         if: ${{ env.REDEPLOY == 'true' }}
