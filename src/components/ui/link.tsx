@@ -1,12 +1,11 @@
-import { cn } from '@/lib/utils'
 import type { VariantProps } from 'class-variance-authority'
 import { Link as ReactRouterLink } from 'react-router-dom'
-import { buttonVariants } from './button'
+import type { buttonVariants } from './button'
 
 interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof buttonVariants> {}
 
 export function Link({ children, variant = 'link', size, ...props }: Props) {
-  const className = cn(buttonVariants({ variant, className: props.className, size }))
+  // const className = cn(buttonVariants({ variant, className: props.className, size }))
   if (props.href?.startsWith('http')) {
     return (
       <a href={props.href} {...props} className={props.className}>
@@ -16,7 +15,7 @@ export function Link({ children, variant = 'link', size, ...props }: Props) {
   }
 
   return (
-    <ReactRouterLink to={props.href || ''} {...props} className={className}>
+    <ReactRouterLink to={props.href || ''} {...props}>
       {children}
     </ReactRouterLink>
   )

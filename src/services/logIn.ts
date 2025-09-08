@@ -11,12 +11,12 @@ export const logIn = async ({ email, password }: LogIn) => {
     })
 
     if (response.data.status === $ResponseStatus.error) {
-      return [response.data, null]
+      return [response.data as string, null]
     }
 
     return [null, response.data]
   } catch (error) {
     console.error(error)
-    return [error, null]
+    return [error as string, null]
   }
 }

@@ -20,7 +20,7 @@ import { object } from 'zod'
 //     return { logIn, isPending }
 // }
 
-export default function SignUpForm() {
+export default function ForgotPasswordForm() {
   // const navigate = useNavigate()
   // const { logIn, isPending } = useLogIn()
   const {

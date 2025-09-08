@@ -6,21 +6,26 @@ export * from './paths'
 import { Loader } from '@/components/icons'
 import { $UserRole } from '@/enums'
 import AppLayout from '@/layout/App.layout'
-import AuthLayout from '@/layout/Auth.layout'
+import DashboardLayout from '@/layout/Dashboard.layout'
+// import AuthLayout from '@/layout/Auth.layout'
 // Pages (dynamic imports)
 const NotFoundPage = lazy(() => import('@/pages/404'))
-const Home = lazy(() => import('@/pages/home'))
-const LogIn = lazy(() => import('@/pages/log-in'))
+// const Home = lazy(() => import('@/pages/home'))
 const Profile = lazy(() => import('@/pages/profile'))
-const ResetPassword = lazy(() => import('@/pages/reset-password'))
+const ForgotPassword = lazy(() => import('@/pages/forgot-password'))
+const LogIn = lazy(() => import('@/pages/log-in'))
 const SignUp = lazy(() => import('@/pages/sign-up'))
+// Dashboard
+const DashboardHome = lazy(() => import('@/pages/dashboard/home'))
+const AccountProfile = lazy(() => import('@/pages/dashboard/profile'))
+const TablesPage = lazy(() => import('@/pages/dashboard/tables'))
 import { Routes as Pathnames } from './paths'
 
 export const AppRouter = () => {
   return (
     <Suspense
       fallback={
-        <div className="h-screen w-full grid place-content-center bg-gradient-to-br from-[lch(8_13.7_275.28)] to-[lch(8_13.7_275.28)]">
+        <div className="h-screen w-full grid place-content-center bg-gradient-to-br from-background to-neutral-900">
           <Loader />
         </div>
       }
@@ -28,16 +33,19 @@ export const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           {/* Auth routes */}
-          <Route element={<AuthLayout />}>
+          <Route>
             <Route path={Pathnames.logIn} element={<LogIn />} />
             <Route path={Pathnames.signUp} element={<SignUp />} />
-            <Route path={Pathnames.resetPassword()} element={<ResetPassword />} />
+            <Route path={Pathnames.forgotPassword()} element={<ForgotPassword />} />
           </Route>
           {/* Auth routes */}
 
           {/* Common routes */}
-          <Route element={<AppLayout validate={false} />}>
-            <Route path={Pathnames.home} element={<Home />} />
+          <Route element={<DashboardLayout />}>
+            {/* <Route path={Pathnames.home} element={<Home />} /> */}
+            <Route path={Pathnames.dashboard.home} element={<DashboardHome />} />
+            <Route path={Pathnames.dashboard.profile} element={<AccountProfile />} />
+            <Route path={Pathnames.dashboard.tables} element={<TablesPage />} />
           </Route>
           {/* Common routes */}
 
