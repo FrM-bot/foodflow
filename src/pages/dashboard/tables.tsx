@@ -176,7 +176,7 @@ export default function TablesPage() {
                 </Button>
               </CardHeader>
               <CardContent>
-                <ul className="grid grid-cols-6 gap-6">
+                <ul className="grid xl:grid-cols-6 lg:grid-cols-3 grid-cols-2 gap-6">
                   {Tables.map((table) => (
                     <li
                       key={table.number}
@@ -207,7 +207,7 @@ export default function TablesPage() {
                 </ul>
               </CardContent>
               <CardFooter className="border-t">
-                <ul className="flex gap-4 mx-auto">
+                <ul className="flex flex-wrap items-center justify-center gap-4 mx-auto">
                   {Object.values(TableStatus).map((table) => (
                     <li key={table.status} className="flex items-center gap-2 p-2">
                       <div
