@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { IconUser } from '@tabler/icons-react'
 
-export default function Profile() {
+export default function ProfilePage() {
   return (
     <div>
       <SiteHeader title="Perfil" />

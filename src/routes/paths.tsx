@@ -15,6 +15,7 @@ export const Routes = {
     products: '/dashboard/products',
     discounts: '/dashboard/discounts',
     menu: '/dashboard/menu',
+    categories: '/dashboard/categories',
     settings: '/dashboard/settings',
     profile: '/dashboard/profile',
     billing: '/dashboard/billing',

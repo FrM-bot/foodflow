@@ -19,6 +19,8 @@ const SignUp = lazy(() => import('@/pages/sign-up'))
 const DashboardHome = lazy(() => import('@/pages/dashboard/home'))
 const AccountProfile = lazy(() => import('@/pages/dashboard/profile'))
 const TablesPage = lazy(() => import('@/pages/dashboard/tables'))
+const CategoriesPage = lazy(() => import('@/pages/dashboard/categories'))
+// Paths
 import { Routes as Pathnames } from './paths'
 
 export const AppRouter = () => {
@@ -46,6 +48,7 @@ export const AppRouter = () => {
             <Route path={Pathnames.dashboard.home} element={<DashboardHome />} />
             <Route path={Pathnames.dashboard.profile} element={<AccountProfile />} />
             <Route path={Pathnames.dashboard.tables} element={<TablesPage />} />
+            <Route path={Pathnames.dashboard.categories} element={<CategoriesPage />} />
           </Route>
           {/* Common routes */}
 

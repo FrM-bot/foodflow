@@ -4,7 +4,7 @@ import { SectionCards } from '@/components/section-cards'
 import { SiteHeader } from '@/components/site-header'
 import data from './data.json'
 
-export default function Page() {
+export default function HomePage() {
   return (
     <div>
       <SiteHeader title="Home" />

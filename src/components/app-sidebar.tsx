@@ -60,25 +60,30 @@ const data = {
       icon: IconShoppingCart,
     },
     {
+      title: 'Categorías',
+      url: Routes.dashboard.categories,
+      icon: IconBook,
+    },
+    {
       title: 'Promociones',
       url: Routes.dashboard.discounts,
       icon: IconTag,
     },
-    {
-      title: 'Carta',
-      url: Routes.dashboard.menu,
-      icon: IconBook,
-    },
+    // {
+    //   title: 'Carta',
+    //   url: Routes.dashboard.menu,
+    //   icon: IconBook,
+    // },
   ],
   navSecondary: [
     {
       title: 'Configuración',
-      url: '',
+      url: Routes.dashboard.settings,
       icon: IconSettings,
     },
     {
       title: 'Obtener ayuda',
-      url: '#',
+      url: Routes.dashboard.help,
       icon: IconHelp,
     },
   ],
