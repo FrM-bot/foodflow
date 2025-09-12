@@ -65,19 +65,19 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href={Routes.dashboard.profile} className="flex gap-2 items-center w-full">
+              <Link href={Routes.dashboard.profile} className="flex gap-2 items-center w-full p-0">
                 <DropdownMenuItem className="w-full">
                   <IconUserCircle />
                   Perfil
                 </DropdownMenuItem>
               </Link>
-              <Link href={Routes.dashboard.billing} className="flex gap-2 items-center w-full">
+              <Link href={Routes.dashboard.billing} className="flex gap-2 items-center w-full p-0">
                 <DropdownMenuItem className="w-full">
                   <IconCreditCard />
                   Facturación
                 </DropdownMenuItem>
               </Link>
-              <Link href={Routes.dashboard.notifications} className="flex gap-2 items-center w-full">
+              <Link href={Routes.dashboard.notifications} className="flex gap-2 items-center w-full p-0">
                 <DropdownMenuItem className="w-full">
                   <IconNotification />
                   Notificaciones

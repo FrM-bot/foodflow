@@ -14,12 +14,12 @@ import {
   IconBook,
   IconHelp,
   IconHome,
-  IconInnerShadowTop,
+  IconPizza,
   IconSettings,
   IconShoppingCart,
   IconTable,
   IconTag,
-  IconUser,
+  // IconUser,
   IconUsers,
 } from '@tabler/icons-react'
 import { NavSidebar } from './nav-sidebar'
@@ -42,11 +42,11 @@ const data = {
       url: Routes.dashboard.waiters,
       icon: IconUsers,
     },
-    {
-      title: 'Usuarios',
-      url: Routes.dashboard.users,
-      icon: IconUser,
-    },
+    // {
+    //   title: 'Usuarios',
+    //   url: Routes.dashboard.users,
+    //   icon: IconUser,
+    // },
     {
       title: 'Mesas',
       url: Routes.dashboard.tables,
@@ -97,8 +97,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <Link href={Routes.dashboard.home} className="flex items-center gap-2">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Foodflow.</span>
+                <IconPizza className="!size-5" />
+                <span className="text-base font-semibold">Foodflow</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -1,7 +1,7 @@
 import { Link } from '@/components/ui/link'
 import { LoginForm } from '@/pages/log-in/form.component'
 import { Routes } from '@/routes'
-import { IconInnerShadowTop } from '@tabler/icons-react'
+import { IconPizza } from '@tabler/icons-react'
 
 export default function LoginPage() {
   return (
@@ -9,9 +9,9 @@ export default function LoginPage() {
       <div className="flex w-full max-w-sm flex-col gap-6">
         <Link href={Routes.home} className="flex items-center gap-2 self-center font-medium">
           <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-            <IconInnerShadowTop className="!size-5 text-black" />
+            <IconPizza className="!size-5 text-black" />
           </div>
-          Foodflow.
+          Foodflow
         </Link>
         <LoginForm />
       </div>

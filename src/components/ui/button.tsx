@@ -5,22 +5,22 @@ import * as React from 'react'
 import { Loader } from '../icons'
 
 const buttonVariants = cva(
-  'inline-flex items-center cursor-pointer justify-center whitespace-nowrap duration-200 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ',
+  'inline-flex items-center cursor-pointer justify-center whitespace-nowrap duration-200 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default: 'bg-primary text-black shadow-lg hover:shadow-primary/10 duration-200',
         destructive: 'bg-destructive/70 text-destructive-foreground shadow-sm border border-destructive',
-        outline: 'border border-neutral-900 bg-background shadow-sm hover:bg-accent',
+        outline: 'border border-neutral-800 shadow-sm hover:bg-neutral-950',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm',
-        ghost: 'hover:bg-neutral-100 hover:text-black',
+        ghost: 'hover:bg-background',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-8',
-        icon: 'h-9 w-9',
+        sm: 'h-8 px-3 text-xs',
+        lg: 'h-10 rounded-lg px-8',
+        icon: 'size-8',
       },
     },
     defaultVariants: {

@@ -45,7 +45,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                 <span className="bg-card text-muted-foreground relative z-10 px-2">Bienvenido de vuelta</span>
               </div>
               <div className="grid gap-6">
-                <div className="grid gap-3">
+                <div className="grid gap-1">
                   <Label htmlFor="email">Email</Label>
                   <div>
                     <Input {...register('email')} placeholder="john@example.com" />
@@ -56,14 +56,19 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     )}
                   </div>
                 </div>
-                <div className="grid gap-3">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Contraseña</Label>
-                    <Link href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
-                      ¿Olvidaste tu contraseña?
-                    </Link>
-                  </div>
-                  <div>
+                <div className="grid grid-cols-3 gap-1">
+                  <Label htmlFor="password" className="col-span-1">
+                    Contraseña
+                  </Label>
+                  <Link
+                    href={Routes.forgotPassword.home}
+                    className="ml-auto text-sm underline-offset-4 hover:underline col-span-2 h-fit"
+                  >
+                    ¿Olvidaste tu contraseña?
+                  </Link>
+                  {/* <div className="flex items-center">
+                  </div> */}
+                  <div className="col-span-full">
                     <Input type="password" {...register('password')} placeholder="********" />
                     {errors.password && (
                       <Typography theme="error" size="small">

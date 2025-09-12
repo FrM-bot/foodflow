@@ -20,6 +20,14 @@ const DashboardHome = lazy(() => import('@/pages/dashboard/home'))
 const AccountProfile = lazy(() => import('@/pages/dashboard/profile'))
 const TablesPage = lazy(() => import('@/pages/dashboard/tables'))
 const CategoriesPage = lazy(() => import('@/pages/dashboard/categories'))
+const ProductsPage = lazy(() => import('@/pages/dashboard/products'))
+const AddProductPage = lazy(() => import('@/pages/dashboard/products/add'))
+const EditProductPage = lazy(() => import('@/pages/dashboard/products/edit'))
+const AddCategoryPage = lazy(() => import('@/pages/dashboard/categories/add'))
+const EditCategoryPage = lazy(() => import('@/pages/dashboard/categories/edit'))
+const WaitersPage = lazy(() => import('@/pages/dashboard/waiters'))
+const AddWaiterPage = lazy(() => import('@/pages/dashboard/waiters/add'))
+import EditWaiterPage from '@/pages/dashboard/waiters/edit'
 // Paths
 import { Routes as Pathnames } from './paths'
 
@@ -38,7 +46,7 @@ export const AppRouter = () => {
           <Route>
             <Route path={Pathnames.logIn} element={<LogIn />} />
             <Route path={Pathnames.signUp} element={<SignUp />} />
-            <Route path={Pathnames.forgotPassword()} element={<ForgotPassword />} />
+            <Route path={Pathnames.forgotPassword.home} element={<ForgotPassword />} />
           </Route>
           {/* Auth routes */}
 
@@ -49,6 +57,14 @@ export const AppRouter = () => {
             <Route path={Pathnames.dashboard.profile} element={<AccountProfile />} />
             <Route path={Pathnames.dashboard.tables} element={<TablesPage />} />
             <Route path={Pathnames.dashboard.categories} element={<CategoriesPage />} />
+            <Route path={Pathnames.dashboard.products} element={<ProductsPage />} />
+            <Route path={Pathnames.dashboard.addProduct} element={<AddProductPage />} />
+            <Route path={Pathnames.dashboard.editProduct()} element={<EditProductPage />} />
+            <Route path={Pathnames.dashboard.addCategory} element={<AddCategoryPage />} />
+            <Route path={Pathnames.dashboard.editCategory()} element={<EditCategoryPage />} />
+            <Route path={Pathnames.dashboard.waiters} element={<WaitersPage />} />
+            <Route path={Pathnames.dashboard.addWaiter} element={<AddWaiterPage />} />
+            <Route path={Pathnames.dashboard.editWaiter()} element={<EditWaiterPage />} />
           </Route>
           {/* Common routes */}
 
