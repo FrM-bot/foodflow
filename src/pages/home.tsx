@@ -4,10 +4,7 @@ import type { User } from '@/types/user'
 
 export const CardUser = ({ fullName, username }: Pick<User, 'fullName' | 'username'>) => {
   return (
-    <Card
-      component="li"
-      className="h-96 flex flex-col justify-between relative overflow-hidden p-0 hover:shadow-lg transition-shadow"
-    >
+    <Card className="h-96 flex flex-col justify-between relative overflow-hidden p-0 hover:shadow-lg transition-shadow">
       {/* 
         <div className="w-full h-full grid place-content-center">
           <Person className="w-40 h-40" />
