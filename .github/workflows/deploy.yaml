@@ -3,9 +3,7 @@ name: Deploy Docker Image to EC2
 on:
   push:
     branches:
-      - main
-env:
-  REDEPLOY: true
+      - deploy
 
 jobs:
   deploy:
@@ -15,7 +13,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
 
       - name: Create file .env
         run: |
@@ -26,18 +24,15 @@ jobs:
 
       - name: Copy .env to EC2
         run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no .env ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }}:/home/ubuntu/.env
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no .env ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }}:/home/${{ secrets.EC2_USER }}/.env
 
       - name: Deploy Docker image to EC2
-        if: ${{ env.REDEPLOY == 'true' }}
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << 'EOF'
-          # Elimina el código anterior y clona el nuevo desde GitHub
           rm -rf foodflow-frontend
           git clone https://github.com/${{ github.repository }}.git foodflow-frontend
           cd foodflow-frontend
           mv /home/ubuntu/.env /home/ubuntu/foodflow-frontend/.env
-          # Construye y levanta los servicios con Docker Compose
           docker compose down || true
           docker compose up -d --build
           EOF
