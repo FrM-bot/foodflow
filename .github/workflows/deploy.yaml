@@ -30,7 +30,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << 'EOF'
           rm -rf foodflow-frontend
-          git clone https://github.com/${{ github.repository }}.git foodflow-frontend
+          git clone https://github.com/${{ github.repository }}.git foodflow-frontend -b ${{ vars.DEPLOY_BRANCH }}
           cd foodflow-frontend
           mv /home/ubuntu/.env /home/ubuntu/foodflow-frontend/.env
           docker compose down || true
