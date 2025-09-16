@@ -3,7 +3,7 @@ name: Deploy Docker Image to EC2
 on:
   push:
     branches:
-      - main
+      - deploy
 env:
   REDEPLOY: true
 
