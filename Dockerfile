@@ -34,7 +34,7 @@ RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the application code and build for production
 COPY . ./
-RUN npm run build
+RUN pnpm build
 
 # Stage 2: Development environment
 FROM node:24-alpine AS development
