@@ -4,14 +4,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // Others
 export * from './paths'
 import { Loader } from '@/components/icons'
-import { $UserRole } from '@/enums'
+// import { $UserRole } from '@/enums'
 import AppLayout from '@/layout/App.layout'
 import DashboardLayout from '@/layout/Dashboard.layout'
 // import AuthLayout from '@/layout/Auth.layout'
 // Pages (dynamic imports)
 const NotFoundPage = lazy(() => import('@/pages/404'))
-// const Home = lazy(() => import('@/pages/home'))
-const Profile = lazy(() => import('@/pages/profile'))
+const Home = lazy(() => import('@/pages/home'))
+// const Profile = lazy(() => import('@/pages/profile'))
 const ForgotPassword = lazy(() => import('@/pages/forgot-password'))
 const LogIn = lazy(() => import('@/pages/log-in'))
 const SignUp = lazy(() => import('@/pages/sign-up'))
@@ -69,8 +69,8 @@ export const AppRouter = () => {
           {/* Common routes */}
 
           {/* User routes */}
-          <Route element={<AppLayout rolesAllowed={[$UserRole.user]} redirect={Pathnames.logIn} validate />}>
-            <Route path={Pathnames.user.profile} element={<Profile />} />
+          <Route element={<AppLayout validate={false} />}>
+            <Route path={Pathnames.home} element={<Home />} />
           </Route>
           {/* User routes */}
 

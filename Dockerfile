@@ -51,14 +51,18 @@ RUN pnpm install --frozen-lockfile
 COPY . ./
 
 # Expose port for the development server
-EXPOSE 4174
+EXPOSE 4173
 CMD ["pnpm", "preview"]
 
 # Stage 3: Production environment
 FROM nginx:alpine AS production
 
+# Remove unnecessary files
+RUN rm -rf /usr/share/nginx/html/*.html
+
 # Copy the production build artifacts from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
+
 
 # Expose the default NGINX port
 EXPOSE 80

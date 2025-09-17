@@ -1,4 +1,4 @@
-import { Avatar } from '@/components/avatar'
+// import { Avatar } from '@/components/avatar'
 import { Logout } from '@/components/icons'
 import { buttonVariants } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
@@ -15,12 +15,12 @@ export const MenuMobile = () => {
 
   return (
     <Popover>
-      <PopoverTrigger className="hs-collapse-toggle size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700">
+      <PopoverTrigger className="hs-collapse-toggle size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700">
         <HamburgerMenuIcon />
       </PopoverTrigger>
       <PopoverContent className="w-60 flex flex-col bg-white text-black">
         <div className="flex flex-col gap-y-4">
-          {status === $SessionStatus.authenticated && session !== null && (
+          {/* {status === $SessionStatus.authenticated && session !== null && (
             <div>
               <Link to={Routes.user.profile} className="flex justify-center font-semibold">
                 <Avatar src="" alt={session?.email || 'U'} />
@@ -29,14 +29,14 @@ export const MenuMobile = () => {
                 {session?.email}
               </Link>
             </div>
-          )}
+          )} */}
 
           {session === null &&
-            NavLinks.map((link) => (
+            NavLinks.UNAUTHENTICATED.map((link) => (
               <Link
                 key={link.label}
                 className={cn(
-                  'font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-neutral-400 dark:hover:text-neutral-500',
+                  'font-medium hover:text-gray-400 sm:py-6',
                   location.pathname.includes(link.href) ? 'text-blue-600 sm:py-6 dark:text-blue-500' : ''
                 )}
                 to={link.href}
