@@ -7,7 +7,7 @@ export function MenuDesktop() {
   return (
     <div className="hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
       <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
-        {NavLinks.map((link) => (
+        {NavLinks.UNAUTHENTICATED.map((link) => (
           <Link
             key={link.label}
             className={cn(
@@ -19,9 +19,7 @@ export function MenuDesktop() {
             {link.label}
           </Link>
         ))}
-        <div className="sm:border-s sm:border-gray-300 sm:ps-6">
-          <UserNavar />
-        </div>
+        <UserNavar />
       </div>
     </div>
   )

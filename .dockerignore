@@ -1,6 +1,18 @@
-node_modules
+# Ignore Docker-related files
 npm-debug.log
 Dockerfile
+docker-compose.yml
 .dockerignore
+
+# Ignore Git-related files
 .git
 .gitignore
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+tmp/

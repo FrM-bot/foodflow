@@ -1,4 +1,4 @@
-import AccessDenied from '@/components/accessDenied'
+import AccessDenied from '@/components/access-denied'
 import { Loader } from '@/components/icons'
 import { useSession } from '@/store/session'
 import type { UserRole } from '@/types'

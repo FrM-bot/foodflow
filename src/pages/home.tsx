@@ -19,9 +19,9 @@ export const CardUser = ({ fullName, username }: Pick<User, 'fullName' | 'userna
         />
       </picture>
       <div />
-      <div className="flex flex-col backdrop-blur-sm px-3 py-2 bg-neutral-200/90 border-t border-t-neutral-200/50">
+      <div className="flex flex-col backdrop-blur-sm px-3 py-2 bg-background/90 border-t">
         <h2 className="font-semibold text-lg">{fullName}</h2>
-        <span className="text-neutral-700">{username}</span>
+        <span className="text-neutral-200">{username}</span>
       </div>
     </Card>
   )
