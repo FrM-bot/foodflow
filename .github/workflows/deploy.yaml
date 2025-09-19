@@ -35,7 +35,15 @@ jobs:
           git clone https://github.com/${{ github.repository }}.git foodflow-frontend -b ${{ env.DEPLOY_BRANCH }}
           cd foodflow-frontend
           mv /home/ubuntu/.env /home/ubuntu/foodflow-frontend/.env
-          docker compose down || true
-          docker compose up -d --build
+
+          docker stop $(docker ps -q)
+          docker rm $(docker ps -a -q)
+
+          docker build -t frontend-app -f Dockerfile --target production .
+          docker run -p 80:80 frontend-app
+
           exit
           EOF
+
+# docker compose up -d --build
+# docker compose down || true
