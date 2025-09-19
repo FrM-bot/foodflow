@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Create file .env
         run: |
@@ -34,16 +34,8 @@ jobs:
           rm -rf foodflow-frontend
           git clone https://github.com/${{ github.repository }}.git foodflow-frontend -b ${{ env.DEPLOY_BRANCH }}
           cd foodflow-frontend
-          mv /home/ubuntu/.env /home/ubuntu/foodflow-frontend/.env
-
-          docker stop $(docker ps -q)
-          docker rm $(docker ps -a -q)
-
-          docker build -t frontend-app -f Dockerfile --target production .
-          docker run -p 80:80 frontend-app
-
+          mv /home/${{ secrets.EC2_USER }}/.env /home/${{ secrets.EC2_USER }}/foodflow-frontend/.env
+          docker compose up -d --build
+          docker compose down || true
           exit
           EOF
-
-# docker compose up -d --build
-# docker compose down || true
