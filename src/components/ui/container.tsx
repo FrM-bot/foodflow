@@ -7,5 +7,5 @@ type Props = AllHTMLAttributes<ElementType> & {
 }
 
 export function Container({ component, children, className, ...props }: Props) {
-  return createElement(component || 'div', { ...props, className: cn('container', className) }, children)
+  return createElement(component || 'div', { ...props, className: cn('container mx-auto', className) }, children)
 }

@@ -1,27 +1,4 @@
-# # Build Stage
-# FROM node:24-alpine AS build
-
-# WORKDIR /app
-
-# COPY package*.json ./
-
-# RUN npm install
-
-# COPY . .
-
-# RUN npm run build
- 
-# # Production Stage
-# FROM nginx:mainline-alpine AS production
-
-# COPY --from=build /app/dist /usr/share/nginx/html
-
-# EXPOSE 80
-
-# CMD ["nginx", "-g", "daemon off;"]
-
 # Stage 1: Build the React app
-# FROM node:24-alpine AS build
 FROM node:24-alpine AS build
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -51,11 +28,14 @@ RUN pnpm install --frozen-lockfile
 COPY . ./
 
 # Expose port for the development server
-EXPOSE 4174
+EXPOSE 4173
 CMD ["pnpm", "preview"]
 
 # Stage 3: Production environment
 FROM nginx:alpine AS production
+
+# Remove unnecessary files
+RUN rm -rf /usr/share/nginx/html/*.html
 
 # Copy the production build artifacts from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html

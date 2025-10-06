@@ -1,11 +1,12 @@
 import { Routes } from '@/routes'
+import { Container } from './ui/container'
 
 export function Footer() {
   return (
     <footer className="mt-auto w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto border-t">
-      <div className="text-center container">
+      <Container className="text-center">
         <div>
-          <a className="flex-none text-xl font-semibold text-black dark:text-white" href={Routes.home} aria-label="Brand">
+          <a className="flex-none text-xl font-semibold" href={Routes.home} aria-label="Brand">
             Brand
           </a>
         </div>
@@ -83,7 +84,7 @@ export function Footer() {
             </svg>
           </a>
         </div>
-      </div>
+      </Container>
     </footer>
   )
 }
